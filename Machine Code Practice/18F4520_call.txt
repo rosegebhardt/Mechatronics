@@ -1,0 +1,43 @@
+18F4520
+
+include <p18f4520.inc>
+
+COUNT EQU 0x20
+VAR_I EQU 0x21
+VAR_J EQU 0x22
+VAR_K EQU 0x23
+	ORG 0x00
+	goto Start
+
+Start
+	movlw 0x00
+	movwf TRISC
+	clrf COUNT
+Main
+	movf COUNT, W
+	movwf PORTC
+	call Delay
+	incf COUNT, F
+	goto Main
+Delay
+	movlw .250
+	1movwf VAR_I
+	Call some_other_function
+L2
+	movlw .100
+	movwf VAR_J
+L3
+	movlw .100
+	movwf VAR_K
+L4
+			nop
+			decfsz VAR_K, F
+			goto L4
+		decfsz VAR_J, F
+		goto L3
+	decfsz VAR_I, F
+	goto L2
+	
+	return
+
+END

@@ -1,0 +1,41 @@
+ATmega328
+
+	.def COUNT =r15 ;counter
+	.def VAR_I =r16 ;outer loop variable
+	.def VAR_J =r17 ;inner loop variable
+	.def VAR_K =r18 ;inner loop variable 
+	.def TMP =r19	
+
+start:
+
+	clr TMP
+	out DDRB,TMP 	;clear portb data direction register ->make PORTB output
+	clr COUNT 		;clear counter (initialize to 0)
+
+L1:
+
+	out PORTB, COUNT 	;move count into PORTB
+	ldi VAR_I, 250 		;fill outer loop variable
+
+L2:
+
+	ldi VAR_J, 100 	;fill innerloop variable
+
+L3:
+
+	ldi VAR_K, 100	;fill innerloop variable
+	
+L4:
+
+	nop 			;no operation
+	dec VAR_K		;decrement inner loop variable
+	brne L4			;branch to L4 if not equal to zero
+	
+	dec VAR_J 		;decrement inner loop variable
+	brne L3 		;branch to L3 if not equal to zero
+
+	dec VAR_I 		;decrement outer loop variable
+	brne L2 		;branch to L2 if not equal to zero
+
+	inc COUNT 		;increment COUNT
+	rjmp L1 		;jump to L1

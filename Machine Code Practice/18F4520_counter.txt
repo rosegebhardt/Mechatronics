@@ -1,0 +1,50 @@
+18F4520
+
+include <p18f4520.inc>
+
+COUNT EQU 0x20
+VAR_I EQU 0x21
+VAR_J EQU 0x22
+VAR_K EQU 0x23
+	ORG 0x00
+	goto start
+	ORG 0x08
+	
+start
+
+	movlw 0x00
+	movwf TRISC
+	clrf COUNT
+	
+L1
+
+	movf COUNT, W
+	movwf PORTC	
+	movlw .250
+	movwf VAR_I
+	
+L2
+
+		movlw .100
+		movwf VAR_J
+		
+L3
+
+			movlw 0.100
+			movwf VAR_K
+			
+L4
+
+					nop
+				decfsz VAR_K, F
+				goto L4
+				
+			decfsz VAR_J, F
+			goto L3
+			
+		decfsz VAR_I, F
+		goto L2
+		
+		incf COUNT, F
+		goto L1
+		END
