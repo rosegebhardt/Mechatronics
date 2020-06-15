@@ -1,0 +1,3 @@
+'pid' contains an adjustable PID ccontroller written in machine code.
+
+'alt_pid' contain an adjustable PID controller written in standard Arduino code using the 'PID_v1' package
